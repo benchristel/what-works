@@ -203,7 +203,7 @@ _how?_
 <details>
 <summary>
 
-## Get Useful Feedback in 400 Milliseconds
+### Get Useful Feedback in 400 Milliseconds
 
 </summary>
 
@@ -218,9 +218,9 @@ _how?_
 
 </details>
 
-## Interface design drives tests; tests drive implementation
+### Interface design drives tests; tests drive implementation
 
-## Designing top-down
+### Designing top-down
 
 - input/processing/output (Eric Roberts: _The Art and Science of C_)
 - phrase the processing steps as app-agnostic utilities.
@@ -230,14 +230,14 @@ _how?_
   how the problem gets solved? Or is it too vague, too high-level to actually explain anything?
   Or too low-level and grubby, so the solution is obscured?
 
-## Limiting call depth
+### Limiting call depth
 
 - too many layers make the code hard to follow
 - a clear separation between mechanism and policy helps greatly.
   The mechanism code can have several layers of calls without causing readability
   problems, since it will seldom need to be read.
 
-## Bring the language up to meet the problem
+### Bring the language up to meet the problem
 
 - pure top-down design breaks a problem into smaller and smaller pieces until the pieces
   are the fundamental operations of the programming language.
@@ -247,35 +247,35 @@ _how?_
   is easy to express. In other words, design better mechanisms with which to express your
   policy.
 
-## How to choose a test subject
+### How to choose a test subject
 
 - choosing a test subject is designing an interface
 - adding tests stabilizes the interface (makes it harder to change). plan accordingly.
 - design several collaborating parts at the same time?
 
-## Ensuring integration with types
+### Ensuring integration with types
 
 - you can also write a small number of integration tests. Often, just one is enough.
 
-## Separate Computation from Effects
+### Separate Computation from Effects
 
 - a.k.a. "separate decisions from dependencies"
 
-## Represent Effects as Values
+### Represent Effects as Values
 
-## Use machines to interleave computation with effects
+### Use machines to interleave computation with effects
 
-## Use fakes when the order / number of effects isn't critical
+### Use fakes when the order / number of effects isn't critical
 
-## Types and tests serve orthogonal purposes. Use both.
+### Types and tests serve orthogonal purposes. Use both.
 
 - when I say "types" I mean algebraic types.
 
-## Use linters to find dead code
+### Use linters to find dead code
 
 - avoid line length limits and other superficial style checks that force code to be asymmetrical.
 
-## Write tests that catch your mistakes
+### Write tests that catch your mistakes
 
 - quote Kent Beck
 
@@ -283,24 +283,24 @@ _how?_
 >
 > —Edsger Dijkstra
 
-## Ensure that everyone can run the tests
+### Ensure that everyone can run the tests
 
-## As you work, run the tests several times per minute
+### As you work, run the tests several times per minute
 
-## Remove all obstacles to getting continuous feedback
+### Remove all obstacles to getting continuous feedback
 
 - obstacles can be psychological or technical
 
-## There are four testing methods that are useful in different situations
+### There are four testing methods that are useful in different situations
 
 - formal vs. informal
 - manual vs. automated
 
-## There are two main types of formal automated test
+### There are two main types of formal automated test
 
 - system vs. unit
 
-## System tests can serve many purposes. Know what yours are for.
+### System tests can serve many purposes. Know what yours are for.
 
 - functional
 - perf
@@ -309,25 +309,25 @@ _how?_
 - recovery
 - ...
 
-## Testability is Worth Designing For
+### Testability is Worth Designing For
 
 - geepaw calls this "the driven premise"
 
-## There are five kinds of test doubles
+### There are five kinds of test doubles
 
 - dummy, stub, spy, mock, fake
 
-## There are two schools of thought about test driven development
+### There are two schools of thought about test driven development
 
 - london vs. detroit
 
-## There are two approaches to writing assertions
+### There are two approaches to writing assertions
 
 - state-based vs. message-based
 
-## [Design] Separate Computation from Effects
+### [Design] Separate Computation from Effects
 
-## There are three kinds of code
+### There are three kinds of code
 
 - computation / pure functions
   - what a Turing Machine can compute
@@ -340,58 +340,58 @@ _how?_
 - procedures
   - affect process-external state
 
-## Judge code by consilience
+### Judge code by consilience
 
 - does it harmonize with the user's needs and expectations?
 - can the programmers who will maintain it understand how it works? Can they add features to it without adding bugs?
 - does it work well with the machine?
   - e.g. memory locality in row-oriented vs. column oriented layouts, arrays vs. linked lists. Arrays (copied on write) may be faster even when immutability is to be maintained. Profile before optimizing!
 
-## A program is a theory about how to solve a problem
+### A program is a theory about how to solve a problem
 
-## Design interfaces, refactor implementations
+### Design interfaces, refactor implementations
 
-## Review process, not just code
+### Review process, not just code
 
-## Preserve immutability by copying on write
+### Preserve immutability by copying on write
 
-## [Testing] Keep test suites flat
+### [Testing] Keep test suites flat
 
-## [Design] Keep the call graph flat
+### [Design] Keep the call graph flat
 
-## [Testing] Start with the edges
+### [Testing] Start with the edges
 
 - a.k.a. thorns around the gold
 
-## [Testing] Control your experiments
+### [Testing] Control your experiments
 
 - a.k.a. set up for success
 
-## [Testing] Distrust test coverage measurements
+### [Testing] Distrust test coverage measurements
 
-## [Style] Make similar things look the same so important differences stand out
+### [Style] Make similar things look the same so important differences stand out
 
 - your linter may fight you
 
-## [Refactoring] Use the Flocking Rules to refactor toward symmetry
+### [Refactoring] Use the Flocking Rules to refactor toward symmetry
 
-## When to use exceptions vs. error returns
+### When to use exceptions vs. error returns
 
-## Algebraic properties of contracts
+### Algebraic properties of contracts
 
-## Shallow Hierarchies
+### Shallow Hierarchies
 
-## Representing effects as data
+### Representing effects as data
 
-## [Testing] Use tests to learn about your testing tools
+### [Testing] Use tests to learn about your testing tools
 
  - use tests to discover what you don’t know by first writing the thing you do know.
 
-## [Types] Make Illegal States Unrepresentable
+### [Types] Make Illegal States Unrepresentable
 
-## [Types] Make Equivalent States Identical
+### [Types] Make Equivalent States Identical
 
-## [Types] Parse, Don't Validate
+### [Types] Parse, Don't Validate
 
 </details>
 
