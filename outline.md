@@ -1,12 +1,13 @@
 # What Works
 
+<details>
+<summary>
+  
+## Introduction
+  
+_where did this book come from and why am I writing it?_
 
-
------------------------------------------------------------
-
-
-
-## Introduction: where did this book come from and why am I writing it?
+</summary>
 
 - I aim to write software that doesn't have any bugs—that does exactly what I intend it to do.
 - this book is a list of things I have tried that work
@@ -44,14 +45,17 @@ what haven't I tried in earnest?
 
 ### Algebraic Types
 
+</details>
 
+<details>
+<summary>
 
------------------------------------------------------------
+## Vision
+  
+_I'm advocating change. What is the goal of the change? why is it compelling?_
 
-
-
-## Vision: I'm advocating change. What is the goal of the change? why is it compelling?
-
+</summary>
+    
 ### To what end? Quality.
 
 - a quality system is/does what you expect
@@ -86,12 +90,16 @@ When you return from the meeting, you notice the team's CI monitor is red! A qui
 
 - the point is not to avoid making mistakes, but to catch them quickly (ideally, before users are affected) and reduce risk.
 
+</details>
 
------------------------------------------------------------
+<details>
+<summary>
+  
+## Glossary
 
-
-
-## Glossary: I use some terms to mean very specific things. what are they?
+_I use some terms to mean very specific things. what are they?_
+  
+</summary>
 
 ### Ways of Categorizing Tests
 
@@ -154,13 +162,16 @@ When you return from the meeting, you notice the team's CI monitor is red! A qui
 - machine
 - effect
 
+</details>
 
------------------------------------------------------------
+<details>
+<summary>
 
-
-
-
-## Philosophy
+## Epistemology
+  
+_Understanding—knowledge—is key to quality. What can be known? Where does knowledge come from?_
+  
+</summary>
 
 ### Inductive and Deductive reasoning
 
@@ -174,11 +185,16 @@ When you return from the meeting, you notice the team's CI monitor is red! A qui
 
 ### What types and tests can and can't do
 
------------------------------------------------------------
+</details>
 
-
+<details>
+<summary>
 
 ## Technique
+  
+_how?_
+  
+</summary>
 
 ## You are good enough; now fix your tools
 
@@ -305,3 +321,5 @@ When you return from the meeting, you notice the team's CI monitor is red! A qui
 ## [Types] Make Equivalent States Identical
 
 ## [Types] Parse, Don't Validate
+
+</details>
