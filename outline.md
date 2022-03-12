@@ -398,9 +398,6 @@ _how?_
 <details>
 <summary>
 
-<details>
-<summary>
-
 ## Epilogue
 
 _The gist._
@@ -517,6 +514,9 @@ _The gist._
 > —_Tao Te Ching_, trans. Stephen Mitchell
 
 </details>
+
+<details>
+<summary>
 
 ## References
 
