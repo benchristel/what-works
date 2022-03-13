@@ -342,7 +342,18 @@ audience) from business decisions (is this software ready for users)
 
 - a.k.a. "separate decisions from dependencies"
 
+### Focus on the data first
+
+- Fred Brooks quote
+
 ### Represent Effects as Values
+
+### Represent the passage of time as a sequence of calls
+
+### Name things after what they are, not what they're used for
+
+- when a function's name refers to its caller, that's often a sign
+  of a conceptual dependency cycle.
 
 ### Use machines to interleave computation with effects
 
