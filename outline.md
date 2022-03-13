@@ -210,7 +210,7 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
 
 ### Tests as instruments
 
-### Types are Proofs
+### Types as theorems
 
 ### What types and tests can and can't do
 
