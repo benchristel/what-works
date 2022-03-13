@@ -1,5 +1,7 @@
 # What Works
 
+Click the headings to expand them.
+
 <details>
 <summary>
 
