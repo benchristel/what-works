@@ -18,6 +18,8 @@ _where did this book come from and why am I writing it?_
 
 ### Advice about software development is contextual. Stay skeptical.
 
+- these are tools, not rules
+
 ### This is all stuff that has actually worked in practice.
 
 ### This book can provide the start of a pattern language for your team.
@@ -193,6 +195,8 @@ _I use some terms to mean very specific things. what are they?_
   - an OS process is a suspendable machine
 - effect
 
+### Accidental and Essential Complexity
+
 </details><!-- Glossary -->
 
 <details>
@@ -299,6 +303,13 @@ audience) from business decisions (is this software ready for users)
 <details>
 <summary><h2>Designing Interfaces</h2></summary>
 
+### Designing code means dividing it into parts
+
+- the way we draw the boundaries between parts implies certain
+  interfaces and interaction between the parts.
+- the interactions at these interfaces largely determine whether
+  the code is comprehensible or not.
+
 ### Interface design drives tests; tests drive implementation
 
 ### Designing top-down
@@ -328,6 +339,12 @@ audience) from business decisions (is this software ready for users)
   is easy to express. In other words, design better mechanisms with which to express your
   policy.
 
+### Model-View-Controller
+
+### Adding Viewmodels
+
+### Eliminate accidental state
+
 ### How to choose a test subject
 
 - choosing a test subject is designing an interface
@@ -354,6 +371,11 @@ audience) from business decisions (is this software ready for users)
 
 - when a function's name refers to its caller, that's often a sign
   of a conceptual dependency cycle.
+
+### Consider the value of reuse across time as well as space
+
+- reused code does not have to be called in multiple places
+- it can simply not change while other things change around it
 
 ### Use machines to interleave computation with effects
 
