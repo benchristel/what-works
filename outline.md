@@ -45,7 +45,7 @@ what haven't I tried in earnest?
 
 ### Algebraic Types
 
-</details>
+</details><!-- Introduction -->
 
 <details>
 <summary>
@@ -90,7 +90,7 @@ When you return from the meeting, you notice the team's CI monitor is red! A qui
 
 - the point is not to avoid making mistakes, but to catch them quickly (ideally, before users are affected) and reduce risk.
 
-</details>
+</details><!-- Vision -->
 
 <details>
 <summary>
@@ -116,6 +116,19 @@ _I use some terms to mean very specific things. what are they?_
 ### Unit Test
 
 ### System Test
+
+### Types of system test
+
+- functional
+- integration
+- perf
+- load
+- stress
+- recovery
+- migration
+- journey
+- acceptance
+- ...
 
 ### Fast Test
 
@@ -144,6 +157,13 @@ _I use some terms to mean very specific things. what are they?_
 
 ### Test-Driven Development
 
+- Red-green-refactor
+- London-school TDD
+- Detroit-school TDD
+- the crucial difference: state-based vs. messsage-based assertions.
+- you need both of these in your toolkit. State-based assertions
+  are more often what you want, though.
+
 ### Algebraic Type Systems
 
 - important differences from Java or C-style types
@@ -164,9 +184,14 @@ _I use some terms to mean very specific things. what are they?_
 - data
 - computation
 - machine
+  - a Turing machine runs until it is "done". A suspendable machine can be observed and fiddled with as it computes.
+  - can change state (within the OS process)
+  - no one talks about these for some reason. people talk about state machines, which are a particular kind of suspendable machine.
+  - cite Parnas
+  - an OS process is a suspendable machine
 - effect
 
-</details>
+</details><!-- Glossary -->
 
 <details>
 <summary>
@@ -189,23 +214,12 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
 
 ### What types and tests can and can't do
 
-</details>
+</details><!-- Epistemology -->
 
 <details>
-<summary>
+<summary><h2>Beginning</h2></summary>
 
-## Technique
-
-_how?_
-
-</summary>
-
-<details>
-<summary>
-
-### Get Useful Feedback in 400 Milliseconds
-
-</summary>
+### Aim to get useful feedback in 400 milliseconds
 
 - tests
 - types
@@ -216,7 +230,31 @@ _how?_
     - mock everything? nope.
     - you will need to change how you design.
 
-</details>
+### Start with a walking skeleton
+
+### README-driven development
+
+### Ensure everyone can run the tests
+
+### Start with manual testing
+
+### Types and tests serve orthogonal purposes. Use both.
+
+- when I say "types" I mean algebraic types.
+
+### Use linters to find dead code
+
+- avoid line length limits and other superficial style checks that force code to be asymmetrical.
+
+### Make status evident
+
+- CI monitor
+- you may not need a CI monitor
+
+</details><!-- Beginning -->
+
+<details>
+<summary><h2>Designing Interfaces</h2></summary>
 
 ### Interface design drives tests; tests drive implementation
 
@@ -265,15 +303,56 @@ _how?_
 
 ### Use machines to interleave computation with effects
 
+### Domain sandwich
+
+- domain code may call effectful code injected by the entrypoint
+  (e.g. main)
+
+### When to use exceptions vs. error returns
+
+</details><!-- Designing Interfaces -->
+
+<details>
+<summary><h2>Designing Data</h2></summary>
+
+### Using union types to enumerate possible states
+
+### Clean data before it reaches domain code
+
+### [Types] Make Illegal States Unrepresentable
+
+### [Types] Make Equivalent States Identical
+
+### [Types] Parse, Don't Validate
+
+</details><!-- Designing Data -->
+
+<details>
+<summary><h2>Designing to Contracts</h2></summary>
+
 ### Use fakes when the order / number of effects isn't critical
 
-### Types and tests serve orthogonal purposes. Use both.
+### Algebraic properties of contracts
 
-- when I say "types" I mean algebraic types.
+- idempotency
+- nilpotency
+- associativity
+- commutativity
+- last-write wins
+- first-write wins
+- transitivity? how might this apply?
 
-### Use linters to find dead code
+### Contract testing
 
-- avoid line length limits and other superficial style checks that force code to be asymmetrical.
+### Use contract tests as a cross-team collaboration tool
+
+### Reuse ubiquitous interfaces
+
+
+</details><!-- Designing to Contracts -->
+
+<details>
+<summary><h2>Writing Tests</h2></summary>
 
 ### Write tests that catch your mistakes
 
@@ -283,81 +362,21 @@ _how?_
 >
 > —Edsger Dijkstra
 
-### Ensure that everyone can run the tests
-
 ### As you work, run the tests several times per minute
 
 ### Remove all obstacles to getting continuous feedback
 
 - obstacles can be psychological or technical
 
-### There are four testing methods that are useful in different situations
+### Write single-purpose tests
 
-- formal vs. informal
-- manual vs. automated
-
-### There are two main types of formal automated test
-
-- system vs. unit
-
-### System tests can serve many purposes. Know what yours are for.
-
-- functional
-- perf
-- load
-- stress
-- recovery
-- ...
-
-### Testability is Worth Designing For
-
-- geepaw calls this "the driven premise"
-
-### There are five kinds of test doubles
-
-- dummy, stub, spy, mock, fake
-
-### There are two schools of thought about test driven development
-
-- london vs. detroit
-
-### There are two approaches to writing assertions
-
-- state-based vs. message-based
-
-### [Design] Separate Computation from Effects
-
-### There are three kinds of code
-
-- computation / pure functions
-  - what a Turing Machine can compute
-- suspendable machines
-  - a Turing machine runs until it is "done". A suspendable machine can be observed and fiddled with as it computes.
-  - can change state (within the OS process)
-  - no one talks about these for some reason. people talk about state machines, which are a particular kind of suspendable machine.
-  - cite Parnas
-  - an OS process is a suspendable machine
-- procedures
-  - affect process-external state
-
-### Judge code by consilience
-
-- does it harmonize with the user's needs and expectations?
-- can the programmers who will maintain it understand how it works? Can they add features to it without adding bugs?
-- does it work well with the machine?
-  - e.g. memory locality in row-oriented vs. column oriented layouts, arrays vs. linked lists. Arrays (copied on write) may be faster even when immutability is to be maintained. Profile before optimizing!
-
-### A program is a theory about how to solve a problem
-
-### Design interfaces, refactor implementations
-
-### Review process, not just code
-
-### Preserve immutability by copying on write
+- avoid trying to make tests do double-duty, e.g. test performance
+and features. This just makes failures harder to diagnose.
+- tests are not the place to document realistic input values.
+  Using weird values more clearly demonstrates the ways in which the
+  solution is generalized.
 
 ### [Testing] Keep test suites flat
-
-### [Design] Keep the call graph flat
 
 ### [Testing] Start with the edges
 
@@ -369,36 +388,63 @@ _how?_
 
 ### [Testing] Distrust test coverage measurements
 
+
+### [Testing] Use tests to learn about your testing tools
+
+ - use tests to discover what you don’t know by first writing the thing you do know.
+
+### Test contravariance
+
+- as the tests get more specific, code gets more generic
+- if you are writing concrete code/config/data, write generic tests to validate it.
+
+</details><!-- Writing Tests -->
+
+<details>
+<summary><h2>Refactoring</h2></summary>
+
 ### [Style] Make similar things look the same so important differences stand out
 
 - your linter may fight you
 
 ### [Refactoring] Use the Flocking Rules to refactor toward symmetry
 
-### When to use exceptions vs. error returns
-
-### Algebraic properties of contracts
+### Don't just abbreviate duplication; eliminate it.
 
 ### Shallow Hierarchies
 
-### Representing effects as data
+</details><!-- Refactoring -->
 
-### [Testing] Use tests to learn about your testing tools
+<details>
+<summary><h2>Other stuff that needs a home</h2></summary>
 
- - use tests to discover what you don’t know by first writing the thing you do know.
+### Testability is Worth Designing For
 
-### [Types] Make Illegal States Unrepresentable
+- geepaw calls this "the driven premise"
 
-### [Types] Make Equivalent States Identical
+### Judge code by consilience
 
-### [Types] Parse, Don't Validate
+- does it harmonize with the user's needs and expectations?
+- can the programmers who will maintain it understand how it works? Can they add features to it without adding bugs?
+- does it work well with the machine?
+  - e.g. memory locality in row-oriented vs. column oriented layouts, arrays vs. linked lists. Arrays (copied on write) may be faster even when immutability is to be maintained. Profile before optimizing!
+- you know consilience is good when learning about one domain teaches
+  you something useful about the other.
 
-</details>
+### A program is a theory about how to solve a problem
+
+### Design interfaces, refactor implementations
+
+### Review process, not just code
+
+### Preserve immutability by copying on write
+
+</details><!-- Other stuff that needs a home -->
 
 <details>
 <summary>
 
-## Epilogue
+### Epilogue
 
 _The gist._
 
@@ -513,7 +559,7 @@ _The gist._
 >
 > —_Tao Te Ching_, trans. Stephen Mitchell
 
-</details>
+</details><!-- Epilogue -->
 
 <details>
 <summary>
@@ -544,4 +590,4 @@ _Other people have already said all of this. Here is where to find their work._
 - Jim Coplien: “Why Most Unit Testing is Waste” (pdf)
 - Stephen Mitchell (translator): Tao Te Ching (book)
 
-</details>
+</details><!-- References -->
