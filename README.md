@@ -219,7 +219,7 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
 </details><!-- Epistemology -->
 
 <details>
-<summary><h2>Beginning</h2></summary>
+<summary><h2>Beginning a Project</h2></summary>
 
 ### Aim to get useful feedback in 400 milliseconds
 
@@ -232,9 +232,49 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
     - mock everything? nope.
     - you will need to change how you design.
 
+### Make your dev environment independent of production
+
+### Make installation and configuration trivially easy
+
+- Setting up an installation should be one command
+- If the software can run in multiple configurations, make it
+  easy for devs to install it in every configuration they will need
+  to test.
+
+### Allow multiple installations per machine
+
 ### Start with a walking skeleton
 
-### README-driven development
+### Deploy immediately and often
+
+- deploying to production or a production-like env should be almost
+  the first thing you do.
+  (assuming no users are actually looking at prod.)
+  if you can't deploy the software, you have nothing.
+- establish a lightweight release process. I recommend something like:
+  - tag a particular commit as a release candidate, e.g. 1.0.0-rc1
+  - follow semver unless you have a reason not to.
+  - deploy that commit to a staging environment. For bonus points,
+    create a special environment for each release whose subdomain matches
+    the release version, e.g. https://1.0.0-rc1.frobozz.com
+  - validate that the release is okay.
+  - deploy to production.
+  - tag the commit you deployed with the release version, e.g. 1.0.0.
+
+### Continuous deployment doesn't mean continuous delivery
+
+Some organizations resist continuous deployment processes because
+they mistakenly equate them with continuous delivery.
+Continuous deployment does _not_ mean that every change is immediately
+released to users.
+Decouples technical decisions (is this software ready for an internal
+audience) from business decisions (is this software ready for users)
+
+### Avoid project templates that have a short shelf-life
+
+- a fast suite of tests obviates most other developer conveniences.
+
+### Practice README-driven development
 
 ### Ensure everyone can run the tests
 
@@ -243,6 +283,7 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
 ### Types and tests serve orthogonal purposes. Use both.
 
 - when I say "types" I mean algebraic types.
+- TypeScript, Flow, Kotlin, Scala, Rust
 
 ### Use linters to find dead code
 
@@ -363,6 +404,8 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
 > Program testing can be quite effective for showing the presence of bugs, but is hopelessly inadequate for showing their absence.
 >
 > —Edsger Dijkstra
+
+### Calibrate your tests
 
 ### As you work, run the tests several times per minute
 
