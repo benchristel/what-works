@@ -1,5 +1,7 @@
 # What Works
 
+_Software development as rational inquiry_
+
 Click the headings to expand them.
 
 <details>
@@ -16,15 +18,23 @@ _where did this book come from and why am I writing it?_
 - mostly invented by other people
 - some of this stuff has been known for 50+ years
 
-### Advice about software development is contextual. Stay skeptical.
+### If it hurts, backtrack and try something else
 
 - these are tools, not rules
+- Advice about software development is contextual. Stay skeptical.
+- context: value-oriented projects, not cost-oriented
+  - cost-oriented projects are about reducing the cost of some existing (business or mathematical) process.
+    - suitable for OOP because while requirements may change, the scope of state and the nature of the interacting entities rarely changes
+  - value-oriented projects are about creating something that doesn't yet exist
+    - not suitable for OOP because scope of state, types of entities may change drastically
+
+### This book is for self-organizing engineering teams
+
+- cite Roy Osherove's XP+Scrum video
 
 ### This is all stuff that has actually worked in practice.
 
 ### This book can provide the start of a pattern language for your team.
-
-### If it hurts, backtrack and try something else
 
 ### This is all old news
 
@@ -67,13 +77,65 @@ _I'm advocating change. What is the goal of the change? why is it compelling?_
 - helps us feel at home, alive, present, comfortable, ourselves
   - we spend more and more of our time using computers. we need this.
 
+### Two responses to a bug report
+
+- "oh weird, how can that even happen? I'll file it in our issue tracker; we'll probably start investigating it in 2 weeks."
+- "d'oh! I should have thought of that case. How embarrassing! I'll fix it right now; it should only take a few minutes."
+
+The first response is typical; the second is desirable.
+
+All programmers make mistakes. I'm not claiming I don't write any bugs. I do. But when they're
+discovered, I almost always know why they're happening, because they reflect flaws in my reasoning
+that, once exposed, are obvious.
+
+Your goal should not be to try to prevent all bugs, but to be able to respond to bug reports
+with simple, immediate fixes rather than protracted, head-scratching investigations. The way
+to do this is to understand your code. Test-driven development can help.
+
+### Joy
+
 ### Mental Modeling
 
 the opposite: confusion, feeling like a pinball, anxiety
 
+most code does not help us learn about what it does. We need a holistic understanding of the system (what Peter Naur
+calls a _theory_ of the program) before the parts make sense.
+
+The best code teaches us how to solve a problem, and can be read in at least two ways: whole-to-parts or parts-to-whole.
+
+### Bugs come from complexity
+
+- Cite "out of the tar pit"
+
+- essential complexity bugs: the domain or application is complicated, so programmers make mistakes
+- accidental complexity bugs: there's a mismatch between the user's model and the system's model
+  - e.g. integer overflow. To a user, 2^31-1 isn't special, but to the machine it is.
+
+### Push complexity under the microscope
+
+- complicated computations are relatively easy to deal with; because the code and data can be observed and controlled,
+  bugs can be reproduced "in the lab" and reliably fixed. Complicated effects on things outside the computational
+  process are relatively hard to deal with; they are harder to observe and control.
+- we want to make the program do all the interesting, complicated work as pure computation, with no external effects.
+
+### What "Out of the Tar Pit" Got Wrong
+
+- tests can be useful
+- a suite of tests can give us pretty good confidence that the program behaves correctly, if we assume that
+  the program's code is _simple_: that is, that it makes no unnecessary distinctions between
+  different inputs. Test-driven development is a technique for ensuring that we get code that is as simple
+  as it can be while still passing all the tests.
+
+- OOP and accidental state can be useful
+  - I have found that OOP works well to control accidental complexity.
+  - FP is better suited to essential complexity.
+  - sometimes stateful algorithms are needed to avoid exorbitant memory usage.
+
 ### The means: Fast Feedback and transparency
 
-When we can see more about what's going on in the system, we can mentally model its inner workings. When we can try things out and observe the result, we can learn what the system does by experimenting with it. The quicker we can do this, the quicker we reach a level of comfort where we experience quality.
+When we can see more about what's going on in the system, we can mentally model its inner workings.
+When we can try things out and observe the result, we can learn what the system does by experimenting with it.
+The quicker we can do this, the quicker we reach a level of comfort where we experience quality.
 
 
 ### A vision of the future
@@ -93,6 +155,10 @@ When you return from the meeting, you notice the team's CI monitor is red! A qui
 ### Reflection on the vision
 
 - the point is not to avoid making mistakes, but to catch them quickly (ideally, before users are affected) and reduce risk.
+
+### What needs to change?
+
+what is the diff between the vision and reality?
 
 </details><!-- Vision -->
 
@@ -235,6 +301,15 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
     - you may need to write your own test framework (for now)
     - mock everything? nope.
     - you will need to change how you design.
+- if you can't run all your tests in 400ms, it probably means:
+  - your test framework is too slow. popular test frameworks often have tons
+    of features that make it possible to test poorly-designed code, but slow down
+    all of the tests. E.g. Jest runs every test suite in its own process to allow
+    entire JS modules to be mocked out.
+    - write your own test framework. If you're using JS, use Taste as a starting point.
+  - you're wasting time testing other people's (side-effecting) code. Design your
+    system so your tests only exercise your code (and fast, purely functional third-party code)
+  - you're testing with too much data.
 
 ### Make your dev environment independent of production
 
@@ -248,6 +323,35 @@ _Understanding—knowledge—is key to quality. What can be known? Where does kn
 ### Allow multiple installations per machine
 
 ### Start with a walking skeleton
+
+### Beware of Complicated Frameworks
+
+- What's the difference between a framework and a library?
+  - it's a spectrum, not a hard line.
+  - a framework is monistic and all-encompassing. Libraries can coexist, even if they provide
+    overlapping functionality (e.g. you can have lodash, underscore, and ramda and call them
+    all from the same function). You can't use multiple frameworks in the same code. E.g. a
+    UI component can't use both Angular and React—that would be nonsensical. Each of these
+    frameworks forms a mini-language for writing UIs, and a given piece of the UI can only be
+    written in one language.
+  - a library has a simple interface; a framework has a complex one. It may have a lot of
+    configuration options that essentially form a mini programming language.
+  - Frameworks usually have configuration options; libraries usually don't.
+  - The major difference for our purposes: _you call libraries, but frameworks call you_.
+    (this is an oversimplification; sometimes libraries call you back. But generally, not until
+    you call them).
+    - This means that while you can often replace a library with a fake in your tests,
+      and then run contract tests against the fake to verify that it behaves the same
+      as the library, you cannot do that with a framework. There is no way to run contract
+      tests on a framework. You have to write integrated tests, which are slow. The more
+      complicated your interactions with the framework, the more slow tests you need.
+  - Case study: Giant CI pipeline integrating many scripts using an extremely complicated
+    YAML-based config language. It wasn't possible to test that everything worked together
+    without deploying the pipeline to the cloud and running it. This took 4 hours and cost $20.
+    And it wasn't even a complete test. E.g. if the pipeline succeeded, we couldn't be sure that
+    error handling was working correctly.
+  - Choose frameworks with simple interfaces that you feel confident leaving untested, or
+    covering with just a few integrated tests.
 
 ### Deploy immediately and often
 
@@ -309,6 +413,53 @@ audience) from business decisions (is this software ready for users)
   interfaces and interaction between the parts.
 - the interactions at these interfaces largely determine whether
   the code is comprehensible or not.
+
+### How to divide solutions into parts
+
+- choose a split. consider:
+  - is each part simple?
+  - Is the interaction (e.g. the data that passes between them) simple and comprehensible?
+    - a different way to phrase this: is each part easy to test? If I make a mistake in implementation,
+      will the test failure be easy to understand, or will I have to carefully comb the test output
+      or run a debugger to know what behavior I broke?
+    - if I change or add behavior later, and a test fails, will it be clear whether I should change
+      the code or the test (TODO: this is getting very abstract; I should move this to a section on test UX)
+    - is the data input to each part maximally convenient for that part?
+  - Are the parts coupled to their context, so I have to understand the whole before
+    I can understand any part? Or can I build up from knowledge of the parts to knowledge of the whole?
+  - Could the parts be reused to solve new problems (or new variations on this problem)?
+- repeat several times with different splits and pick the best one.
+- recurse: consider each part and split it.
+
+- decouple parts by relying on their caller to compose them. rather than have each function call the next one in the processing pipeline,
+  have it return some data and let its caller decide what to do with that data.
+
+- heuristic: input/computation/output pattern
+  - separate computations from their context/effects
+- e.g. "print a multiplication table" can be divided into parts:
+  - get the size of the table as user input
+  - generate the table as a sequence of lines
+  - print a sequence of lines
+
+### How to know when you've gotten the split wrong
+
+- lagging indicators:
+  - a function immediately translates its arguments into another form and then
+    just uses the translated args; not the originals.
+    - example: null checks, type conversions
+    - deciding what to do with null, or a parse error etc. is policy, not mechanism—should
+      be the caller's responsibility.
+  - a function does some calculations and at the very end passes the results to another function.
+
+### Use the typechecker to sanity-check your design
+
+- sketch the interface of each part using types
+- write the minimum implementation possible to make the typechecker happy, e.g. `return null`.
+  Values that work well for this include null, empty string, empty array, noop function, etc.
+- then test-drive each part.
+- sometimes the types may force you to write the correct implementation, e.g. `function head<T>(NonEmptyList<T>): T`
+  if that happens, awesome. One less thing you have to test.
+
 
 ### Interface design drives tests; tests drive implementation
 
