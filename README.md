@@ -13,20 +13,43 @@ _where did this book come from and why am I writing it?_
 
 </summary>
 
-- I aim to write software that doesn't have any bugs—that does exactly what I intend it to do.
-- this book is a list of things I have tried that work
-- mostly invented by other people
+### The Goal: less confusion, less anxiety, fewer bugs, more comfort, more habitability, more humanity, more effectiveness
+
+- this book is about ways of seeing and working with code that will make your software a more reliable translation of your intent. In practical terms, this means writing fewer bugs, and being able to add features faster and with less risk.
+- most of these techniques were invented by other people
 - some of this stuff has been known for 50+ years
 
-### If it hurts, backtrack and try something else
+- these techniques are tools, not rules that you have to always follow. They solve a problem in a context. The meta-technique is to always be adapting the techniques to the exact context you find yourself in. There are many aspects of the context to consider:
+  - UX
+  - testability
+  - readability
+  - maintainability
+  - performance
+  - TODO: refine this list.
 
-- these are tools, not rules
-- Advice about software development is contextual. Stay skeptical.
-- context: value-oriented projects, not cost-oriented
-  - cost-oriented projects are about reducing the cost of some existing (business or mathematical) process.
-    - suitable for OOP because while requirements may change, the scope of state and the nature of the interacting entities rarely changes
-  - value-oriented projects are about creating something that doesn't yet exist
-    - not suitable for OOP because scope of state, types of entities may change drastically
+- Because the only way to use these techniques is to be constantly adapting them, you have to be and feel free.
+  - if you feel that political pressure from your manager, architects, coworkers, or whoever, is constraining you to do things in a particular way—_no matter what that way is_, the techniques in this book will seem idealistic and impractical.
+    - I do not believe there is _any_ closed set of rules that will work for all circumstances (at least, no set of rules that a human can comprehend)
+  - double-check with yourself that this is not just a defensive reaction to the prospect of having to do an enormous amount of work to improve things. Are other people _really_ that opposed to change, or are _you_ opposed to change because you might have to be the one to lead it?
+
+- Adapting techniques to circumstances
+  - Try to write code
+  - think "gosh this is hard/confusing"
+  - notice "this technique seems like it could be applicable here"
+  - "but if we use it, it will harm the system in ways XYZ"
+  - "but if we change the technique slightly, the problems with XYZ go away. Even though this modified technique _would cause other problems if used as a general rule_, in this situation it doesn't cause those problems."
+
+Example: writing tests for YAML config
+- problem: config is duplicated and hard to maintain. Different parts need to be kept in sync. It's hard to see the crucial details amid all the boilerplate. It's easy to break things.
+- insight: writing tests for the config could stop us from breaking things.
+- problem: testing guidelines say to make tests very specific examples of behavior. But YAML doesn't have behavior. If we write tests that make assertions about specific YAML nodes, the tests will just duplicate the structure of the config—not helpful.
+- insight: when testing static config files, it's okay for tests to assert on generalities. Tests can have loops and complex logic. They are more like validators than traditional unit tests.
+
+- incremental change
+  - don't demand perfection, and don't settle for "good enough"
+  - identify what the team is already doing that's working, and enhance that.
+  - find the bugs and fix them
+  - make new code exemplary
 
 ### This book is for self-organizing engineering teams
 
