@@ -7,6 +7,104 @@ Click the headings to expand them.
 <details>
 <summary>
 
+## Introduction V2
+
+</summary>
+
+## The Task of Programming
+- If you are a programmer, you do something incredibly difficult every day. It may not be obvious to you just how difficult and daunting the task of programming really is.
+- our job as programmers is to shape a software system's behavior
+	- system: a network of interacting parts
+		- for convenience of representation, we assume these interactions are discretized—since the computers we're talking about are digital, this is a fine assumption.
+	- in a software system, the parts may be people, machines, programs, organizations...
+	- behavior: the set of possible interaction-sequences in the system
+		- interaction-sequences may generally be arbitrarily long
+		- the behavior is an infinitely large set!
+		- example: pocket calculator
+	- enumerating the interaction-sequences is not an efficient way to implement the system.
+	- instead, we write code, which describes the behavior in a compressed format.
+	- code can be good (tight compression that uses concepts we recognize) or bad (inefficient, illegible compression)
+- code is much more comprehensible than a list of interaction-sequences.
+	- but it still doesn't fit in our heads (beyond 10 lines or so)
+	- and so we cannot _directly_ control the code.
+		- There isn't a straight path that goes from desired behavior -> fully-formed design in our heads -> typing the code out, start-to-finish, with no backtracking.
+	- when we write code, we need to use a _process_ which involves _state_: intermediate artifacts (designs, work-in-progress code, tests, etc.) that persist outside our heads.
+	- The process tells us what to do next given the current state of our artifacts and the desired behavior of the system.
+	- the process includes the tools we use to comprehend and shape the code, the way we interact with teammates, how we deploy...
+	- we can _only_ directly control the process. Not the code.
+	- We _can_ look at the code and use our judgements about it as inputs to the process. For example, a process may involve refactoring existing code.
+	- My friend who was between jobs and working on a personal software project set himself the goal of working on it 8 hours a day for a month. I said, "why not set a goal of what features you want to have implemented by the end of the month?" He replied "I can't control what features are implemented. All I can control is how I work and for how long." At that, I was enlightened.
+- processes are so complex and idiosyncratic that it is hard to characterize any _actual_ process exactly. We have theoretical descriptions of processes (XP, waterfall) but these necessarily leave out many details that are specific to the project and the people working on it.
+- code constrains our choice of process.
+	- when the tests take 4 hours, you can't do TDD. Even when tests take 40 seconds, you can't really do TDD.
+- We may choose to constrain the code to accommodate certain processes.
+	- if we want to do TDD, it's important to shape the code and tests so the tests don't take more than a couple seconds to run.
+	- anecdote about member variable prefixes in C++ being used to accommodate text editors that don't highlight member variables differently
+	- if we are choosing a process to work with existing code, the code constrains our choice.
+- Code is not the only constraint on the process. There are also fundamental constraints on human cognition and collaboration that necessarily shape the process.
+	- the mythical man-month: collaboration has a cost
+	- doherty threshold
+
+We can only effectively approach the programming task if we acknowledge its enormous difficulty. What I have described in this chapter is a pile-up of difficulty upon difficulty several layers deep. In the subsequent chapters I will take some steps toward resolving these difficulties.
+
+## Process
+- get enough sleep
+- starting a system from scratch
+	- walking skeleton: something technically deployable that hits all the essential integrations and tools
+		- database
+		- external services
+		- client/server interaction
+		- development environment
+		- tests
+		- build
+		- lint/format
+		- versioning
+		- deploy
+	- design verification strategies for sub-doherty feedback
+	- many more much smaller steps
+		- use tools to reveal a problem: mismatch between desired and actual behavior, or code smell. You should be able to do this quickly enough that your attention doesn't wander.
+			- your discernment of code smells is a tool. Code smells should be objective.
+		- fix the problem
+		- use the same tools to verify that the problem is now fixed.
+- evolving an existing system
+	- don't demand perfection, and don't settle for "good enough"
+    - find out what the team is already doing that's working, and intensify it.
+    - find the bugs and fix them
+    - make new code exemplary
+    - separate fast and slow tests so they can be run at different times
+- working on code
+	- design interfaces (data crossing a boundary)
+	- refactor implementations
+
+## Seeing Code
+Motivating example: design of a timer
+- separate "tick" action from state, calculations (e.g. displaying the time)
+- benefits: testing, persistence
+- "how did you know to do that?"
+	- it is possible to find this design without even thinking about testing or persistence.
+	- you just have to follow the heuristic that actions, state, and calculations should be kept separate
+
+- Capability levels
+	- data
+	- function
+	- state
+	- action
+- Graphs
+	- call graph
+	- dependency graph
+	- why cycles are usually bad
+
+## Designing Code
+- Objectives
+	- tight, legible compression
+	- fast feedback
+	- self-evident correctness (not orthogonal to the other two points)
+
+</details>
+  
+<details>
+<summary>
+  
 ## Introduction
 
 _where did this book come from and why am I writing it?_
